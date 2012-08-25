@@ -1,0 +1,136 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="BF.HelpPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+    
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="BF for Windows Phone" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="help" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.Resources>
+                <Style x:Key="HelpTextTextBox" TargetType="RichTextBox">
+                    <Setter Property="FontSize" Value="24"></Setter>
+                    <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                </Style>
+                <Style x:Key="HelpText" TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="24"></Setter>
+                    <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                </Style>
+            </Grid.Resources>
+            <ScrollViewer>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource HelpText}">BF is an esoteric programming language created by Urban Müller.
+                    While it is designed mainly to amuse programmers it can be used to illustrate some computer science concepts.
+                    BF is Turing Complete which means it is mathematically proven that BF can perform any possible computaton.
+                    However it is not practical for use in real world applications.
+                    <LineBreak />
+                    <LineBreak />
+                    The language consists of eight commands, listed below.
+                    A BF program is a sequence of these commands, possibly interspersed with other characters (which are ignored).
+                    The commands are executed sequentially, except as noted below; an instruction pointer begins at the first command,
+                    and each command it points to is executed, after which it normally moves forward to the next command.
+                    The program terminates when the instruction pointer moves past the last command.
+                    <LineBreak />
+                    <LineBreak />
+                    The BF language uses a simple machine model consisting of the program and instruction pointer,
+                    as well as an array of at least 30,000 byte cells initialized to zero (in BF for WP the array can grow dynamically to the right);
+                    a movable data pointer (initialized to point to the leftmost byte of the array);
+                    and two streams of bytes for input and output.
+                    In this implementation the input and output streams are textboxes on the interface and accept and print ASCII characters.
+                    <LineBreak />
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource HelpText}">
+                    <Span FontSize="36">Commands</Span>
+                    <LineBreak />
+                    <LineBreak />
+                    The eight language commands, each consisting of a single character:
+                    <LineBreak />
+                    <LineBreak />
+                    <Bold>&gt;</Bold> - increment the data pointer (to point to the next cell to the right).
+                    <LineBreak />
+                    <LineBreak />
+                    <Bold>&lt;</Bold> - decrement the data pointer (to point to the next cell to the left). 
+                    In this implementation if the pointer becomes negative the program will report an error and will stop execution.
+                    <LineBreak />
+                    <LineBreak />
+                    <Bold>+</Bold> - increment (increase by one) the byte at the data pointer.
+                    In this implementation if the the value becomes higher than 255 the byte will wrap around and become 0.
+                    <LineBreak />
+                    <LineBreak />
+                    <Bold>-</Bold> - decrement (decrease by one) the byte at the data pointer.
+                    In this implementation if the the value becomes lower than 0 the byte will wrap around and become 255.
+                    <LineBreak />
+                    <LineBreak />
+                    <Bold>.</Bold> - output the byte at the data pointer as an ASCII encoded character.
+                    <LineBreak />
+                    <LineBreak />
+                    <Bold>,</Bold> - accept one byte of input, storing its value in the byte at the data pointer.
+                    In this implementation the user provides the input in advance. 
+                    If the end of the input is reached but the program still requires input it will be provided with the value 0.
+                    <LineBreak />
+                    <LineBreak />
+                    <Bold>[</Bold> - if the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command.
+                    You can think of it as the beginning of a loop.
+                    <LineBreak />
+                    <LineBreak />
+                    <Bold>]</Bold> - if the byte at the data pointer is nonzero, then instead of moving the instruction pointer forward to the next command, jump it back to the command after the matching [ command.
+                    You can think of it as the end of the loop body. In this implementation if the program encounters ] but there is no matching [ the program will report an error and will stop execution.
+                    <LineBreak />
+                    <LineBreak />
+                    You can learn more from the tutorial snippets.
+                    <LineBreak />
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource HelpText}">
+                    BF for WP represents the execution of the program visually.
+                    The memory array is represented as a tape on the screen. 
+                    Movements of the data pointer are represented by animating the tape and on each step of the execution the current instruction is highlighted in the source code.
+                    The user can select a delay for each step of the execution to make it easier to follow. The delay value is in milliseconds. The user can also save snippets for later use.
+                    <LineBreak />
+                    </TextBlock>
+                    <RichTextBox IsReadOnly="true"  Style="{StaticResource HelpTextTextBox}">
+                        <Paragraph>
+                            For more information about BF visit the
+                            <Hyperlink TargetName="_blank"  NavigateUri="http://en.wikipedia.org/wiki/Brainfuck">BF Wikipedia page
+                            </Hyperlink>
+                        </Paragraph>
+                    </RichTextBox>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+</phone:PhoneApplicationPage>

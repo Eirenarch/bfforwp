@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="BF.TapeCell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="167" d:DesignWidth="150">
+
+    <Border Name="border" Margin="5, 0, 5, 0" Width="86" Height="86" BorderThickness="0"  Background="{StaticResource PhoneAccentBrush}">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Name="txtCellValue" Width="80" TextAlignment="Center" FontSize="48">0</TextBlock>
+            <TextBlock Name="txtCellIndex" Margin="-43, 0, 0, 0" Width="43" TextAlignment="Center" VerticalAlignment="Bottom" FontSize="16">0</TextBlock>
+        </StackPanel>
+    </Border>
+</UserControl>
