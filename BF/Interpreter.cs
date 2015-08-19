@@ -104,9 +104,8 @@ namespace BF
                     }
 
                     internalState = InternalInterpreterState.FinalStep;
-                    goto lbFinalStep;
+                    goto case InternalInterpreterState.FinalStep;
                 case InternalInterpreterState.FinalStep:
-                lbFinalStep:
                     internalState = InternalInterpreterState.Finished;
                     if (loopsBeginnings.Count == 0)
                     {
@@ -187,6 +186,7 @@ namespace BF
                                     }
                                 }
                             }
+
                             return new StepInfo(StepType.UnmatchedOpeningBracketLoopError, oldIndex, GetVisibleCells());
                         }
                         else
